@@ -58,11 +58,11 @@ const selectItem = (event, img) => {
 
   } else {
     // alert('Hey, Already added !')
-    sliders.pop(img);
+    // sliders.pop(img);
+    sliders.splice(sliders.indexOf(img),1);
     selectedImageNumber -= 1;
     selectedImage = selectedImageNumber;
     document.getElementById('image-number').innerText = selectedImage;
-
   }
 };
 
@@ -135,7 +135,7 @@ const changeSlide = (index) => {
   items.forEach(item => {
     item.style.display = "none"
   })
-
+  
   items[index].style.display = "block"
 };
 
