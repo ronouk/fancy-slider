@@ -18,6 +18,15 @@ let sliders = [];
 // to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
+const getImages = (query) => {
+  toggleSpinner();
+
+  fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
+    .then(response => response.json())
+    .then(data => showImages(data.hits)) // first problem - uppercase error
+    .catch(err => console.log(err))
+};
+
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
@@ -31,13 +40,7 @@ const showImages = (images) => {
     gallery.appendChild(div)
   })
 
-};
-
-const getImages = (query) => {
-  fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
-    .then(response => response.json())
-    .then(data => showImages(data.hits)) // first problem - uppercase error
-    .catch(err => console.log(err))
+  toggleSpinner();
 };
 
 let slideIndex = 0;
@@ -154,6 +157,13 @@ searchText.addEventListener('keyup', function(e){
     searchBtn.click();
   }
 })
+
+// Bonus - Loader
+
+const toggleSpinner = () => {
+  const spinner = document.getElementById('loading-spinner');
+  spinner.classList.toggle('loader-display');
+}
 
 // Bonus - Footer section
 
